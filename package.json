@@ -1,0 +1,21 @@
+{
+  "name": "shell-python",
+  "version": "1.0.0",
+  "private": true,
+  "description": "spec2cloud shell — FastAPI + Next.js + Azure",
+  "scripts": {
+    "dev": "dotnet run --project apphost.cs",
+    "dev:api": "cd src/api && uvicorn app.main:app --reload --port 5000",
+    "dev:web": "cd src/web && npm run dev",
+    "build:api": "cd src/api && pip install -e .",
+    "build:web": "cd src/web && npm run build",
+    "build:all": "npm run build:api && npm run build:web",
+    "test:api": "cd src/api && pytest",
+    "test:web": "cd src/web && npm run lint",
+    "test:e2e": "npx playwright test --config=e2e/playwright.config.ts",
+    "test:bdd": "cd tests && behave",
+    "test:all": "npm run test:api && npm run test:web && npm run test:bdd && npm run test:e2e",
+    "docs:serve": "cd specs && mkdocs serve",
+    "docs:build": "cd specs && mkdocs build"
+  }
+}
