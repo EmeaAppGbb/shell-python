@@ -560,9 +560,15 @@ infra/                # Azure Bicep templates
 
 | Service | Command | URL |
 |---|---|---|
-| **Aspire (all services)** | `dotnet run --project apphost.cs` | API: http://localhost:5000, Web: http://localhost:3001, Docs: http://localhost:8000 |
+| **Aspire (all services)** | `aspire start` | API: http://localhost:5000, Web: http://localhost:3001, Docs: http://localhost:8000 |
+| Wait for healthy | `aspire wait api --status healthy` | Blocks until API is ready |
+| Describe resources | `aspire describe` | Show resource status, health, endpoints |
+| View logs | `aspire logs <resource>` | Stream console logs for a resource |
+| Stop Aspire | `aspire stop` | Clean shutdown of all resources |
 | Backend (standalone) | `cd src/api && uvicorn app.main:app --reload --port 5000` | http://localhost:5000 |
 | Frontend (standalone) | `cd src/web && npm run dev` | http://localhost:3000 |
+
+> **Always use `aspire start`** (background, non-blocking) — never `aspire run` (interactive, blocking). Use `aspire wait <resource> --status healthy` to block until a resource is ready. Use `aspire describe` to inspect resource status.
 
 > **Prefer Aspire** for all integration, Behave, and e2e testing. Standalone servers are only for isolated slice work.
 
